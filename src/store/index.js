@@ -1,8 +1,12 @@
 //import the combine reducer function from redux
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
 import cart from '../reducers/rcart.js'
 import categories from '../reducers/rcategories.js'
-import products from '../reducers/rproducts.js'
+import products from '../reducers/rmessages.js'
+import apiItems from '../reducers/rapi.js'
+import {composeWithDevTools} from 'redux-devtools-extension';
+
 
 //import in function from reducers that will be run through our combineReducer function.
 
@@ -10,12 +14,13 @@ import products from '../reducers/rproducts.js'
 const allReducers = combineReducers({
    categories: categories,
    activeList: products,
-   cart:cart,
+   cart: cart,
+   apiItems: apiItems
 });
 
 export default createStore(
   allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk))
   );
 //create a store variable using the createStore method.  pass in your imported global reducer, as well as the string to use the redux chrome web tool if desired
 //once your store is set up, you can use the redux web tool to inspect your store.  

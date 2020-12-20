@@ -34,6 +34,7 @@ export default function Categories(){
   theme = responsiveFontSizes(theme);
   const dispatch = useDispatch();
   const category = useSelector ( (state) => state.categories.activeCategory)
+  const apiItems = useSelector ( (state) => state.apiItems)
 
   const toggleF = () => {
     dispatch (actions.toggleFood());
@@ -45,14 +46,17 @@ export default function Categories(){
     console.log('ELECTRONICS TOGGLED:', category)
   }
 
-
+  const testApi = async () => {
+    dispatch (actions.get());
+    console.log('GOT IT:', apiItems)
+  }
 
 
   return (
     <ThemeProvider theme={theme}>
-      <Typography variant="h5">Responsive h5</Typography>
-      <Button onClick={toggleF}>Food</Button> 
-      <Button onClick={toggleE}>Electronics</Button> 
+      <Typography variant="h2">JOHN NO THE CHILDREN</Typography>
+      
+
     </ThemeProvider>
 
   )

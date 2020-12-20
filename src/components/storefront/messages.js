@@ -1,6 +1,7 @@
 // A <Products> component
 // Displays a list of products associated with the selected category
 import React from 'react';
+import {useEffect}from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography';
@@ -28,25 +29,25 @@ let theme = createMuiTheme({
 function Products() {
   theme = responsiveFontSizes(theme);
 
-  const activeProduct = useSelector ((state) => state.activeList.activeList)
-  const category = useSelector ((state) => state.categories.activeCategory)
+  const apiItems = useSelector ( (state) => state.apiItems)
+  
   const dispatch = useDispatch();
-  const addCart = (product) =>{
-    let prodName = product[0]
-    let prodObj = {
-      [prodName]: product[1]
-    }
-    dispatch(actions.addCartAction(prodObj))
-  }
+
+
+  useEffect(() => {
+    dispatch (actions.get());
+    console.log('GOT IT:', apiItems)
+  }, []);
+
     return(
       <ThemeProvider> 
         <Container maxWidth="md" >
           <span>
-            {Object.entries(activeProduct).map((item, i) =>(
+            {apiItems.map((item, i) =>(
               <>
-              <h3 key={Math.random()}>{item[0]}</h3>
-              <img src={`https://source.unsplash.com/300x300?${item[0]}`} />
-              <Button onClick={()=> addCart(item)}>Add to Cart</Button>
+              <h3 key={Math.random()}>{item.date}</h3>
+              <div>{item.text}</div>
+              <img src={`https://source.unsplash.com/100x100?${item.text}`} />
               </>
             ))}
           </span>

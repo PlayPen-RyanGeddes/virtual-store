@@ -10,7 +10,7 @@
 // exported together to the app's index file.
 
 const initialState = {
-  activeCategory: 'none'
+  activeCategory: ''
 }
 
 // Each category should have a normalized name, display name, and a description

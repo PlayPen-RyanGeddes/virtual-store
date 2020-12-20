@@ -1,15 +1,9 @@
 'use strict';
 
-//within this file, declare your actions!
-//these actions will be exported directly to the React components that require them
+import axios from 'axios';
 
-//for example: you could export a const increment as function
-//this function would accept desired params and return an action object with follwing key values:
-// type: 'INCREMENT'
-// payload:param
-//when the action is dispatched to the reducer, you can now access and manipulate the user input via action.payload!
+let api = 'https://auth-deployment.herokuapp.com/api/v1/swears';
 
-//example action syntax
 export const toggleFood = () => {
   return {
     type: "FOOD",
@@ -28,4 +22,18 @@ export const addCartAction = (product) => {
     payload: product
   }
 
+}
+
+export const get = () => async dispatch => {
+  const response = await axios.get(api);
+  const items = response.data.results;
+  dispatch({
+    type: "GET",
+    payload: items
+  });
+}
+
+export const put = (payload) => async dispatch => {
+  await axios.put(`${api}/${payload._id}`, payload);
+  dispatch(get())
 }

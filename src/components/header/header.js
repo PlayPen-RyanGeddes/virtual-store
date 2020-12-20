@@ -13,12 +13,12 @@ function Header() {
     <AppBar position="static" display="flex" flexDirection="row">
       <Toolbar>
         <IconButton edge="start" >
-          <Typography variant="h2" >
-            Our Store
+          <Typography variant="h1" >
+            SwearJar
           </Typography>
         </IconButton>
         {/* Button will have ({state.cart.count}) << for example */}
-        <Button color="inherit" justifyContent="flex-end">Cart (0)</Button>
+        <Button color="inherit" justifyContent="flex-end">Days Clean (0)</Button>
       </Toolbar>
     </AppBar>
 
